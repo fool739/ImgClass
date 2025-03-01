@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ImgClass</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>ImgClass</h1>
+    <div class="upload-form">
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <br><br>
+            <input type="submit" value="Classify">
+        </form>
+    </div>
+    
+    {% if img_data_uri %}
+    <div class="result">
+        <h2>Classification Result:</h2>
+        <div class="flex-container">
+            <div class="image-container">
+                <h3>Uploaded Image</h3>
+                <img class="preview" src="{{ img_data_uri }}" alt="Uploaded Image">
+            </div>
+            <div class="chart-container">
+                <h3>Prediction Confidence</h3>
+                <canvas id="confidenceChart"></canvas>
+            </div>
+        </div>
+        <div>
+            <h3>Top Predictions</h3>
+            <pre>{{ result_text }}</pre>
+        </div>
+    </div>
+    
+    {% if predictions %}
+    <script>
+        // Create chart once the page is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                const ctx = document.getElementById('confidenceChart').getContext('2d');
+                const labels = [
+                    {% for pred in predictions %}
+                        "{{ pred.label|safe }}"{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                ];
+                
+                const data = [
+                    {% for pred in predictions %}
+                        {{ "%.2f"|format(pred.confidence) }}{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                ];
+                
+                const chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Confidence (%)',
+                            data: data,
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.7)',
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(153, 102, 255, 0.7)',
+                                'rgba(255, 159, 64, 0.7)',
+                                'rgba(255, 99, 132, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 99, 132, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("Error creating chart:", error);
+                document.getElementById('confidenceChart').insertAdjacentHTML('afterend', 
+                    '<div class="error">Error displaying chart. Please check console for details.</div>');
+            }
+        });
+    </script>
+    {% endif %}
+    {% endif %}
+</body>
+</html>

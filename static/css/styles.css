@@ -1,0 +1,117 @@
+body {
+    font-family: 'IBM Plex Mono', monospace;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #000000;
+    color: #f0f0f0;
+}
+
+.upload-form {
+    border: 2px dashed #444;
+    padding: 20px;
+    text-align: center;
+    margin: 20px 0;
+    background-color: #151515;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #333;
+    background-color: #151515;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.image-container {
+    width: 48%;
+}
+
+.chart-container {
+    width: 48%;
+    height: 300px;
+    padding: 10px;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 5px;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+img.preview {
+    max-width: 100%;
+    max-height: 300px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    object-fit: contain;
+}
+
+h1, h2, h3 {
+    color: #f38356; 
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+input[type="submit"] {
+    background-color: #f38356;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+canvas {
+    filter: drop-shadow(0 0 5px rgba(212, 102, 0, 0.3));
+}
+
+input[type="file"] {
+    color: #f0f0f0;
+    background-color: #222;
+    padding: 8px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.error-message {
+    color: #ff6b6b;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #2d2d2d;
+    border-left: 4px solid #ff6b6b;
+    border-radius: 2px;
+}
+
+.error {
+    color: #ff6b6b;
+    margin: 10px 0;
+    padding: 8px;
+    font-weight: bold;
+}
+
+#confidenceChart {
+    background-color: rgba(0,0,0,0.1);
+}
+
+pre {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9em;
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+}
