@@ -14,7 +14,7 @@ A simple web application for image classification using a pre-trained ResNet-18 
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/imgclass.git
+git clone https://github.com/fool739/imgclass.git
 cd imgclass
 ```
 
